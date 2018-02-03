@@ -26,7 +26,7 @@
 
 - (void)testBindingPortDefault
 {
-  XCTAssertTrue(NSEqualRanges([FBConfiguration bindingPortRange], NSMakeRange(8100, 100)));
+  XCTAssertTrue(NSEqualRanges([FBConfiguration bindingPortRange], NSMakeRange(8200, 100)));
 }
 
 - (void)testBindingPortEnvironmentOverwrite
