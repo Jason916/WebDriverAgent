@@ -713,7 +713,7 @@
 		EEE9B4711CD02B88009D2030 /* FBRunLoopSpinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRunLoopSpinner.m; sourceTree = "<group>"; };
 		EEEC7C901F21F27A0053426C /* FBPredicate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBPredicate.h; sourceTree = "<group>"; };
 		EEEC7C911F21F27A0053426C /* FBPredicate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBPredicate.m; sourceTree = "<group>"; };
-		EEF9882A1C486603005CA669 /* WebDriverAgentRunner.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WebDriverAgentRunner.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEF9882A1C486603005CA669 /* WDARunner.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WDARunner.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -812,7 +812,7 @@
 			isa = PBXGroup;
 			children = (
 				EE836C021C0F118600D87246 /* UnitTests.xctest */,
-				EEF9882A1C486603005CA669 /* WebDriverAgentRunner.xctest */,
+				EEF9882A1C486603005CA669 /* WDARunner.xctest */,
 				EE158A991CBD452B00A3E3F0 /* WebDriverAgentLib.framework */,
 				EE9B75D41CF7956C00275851 /* IntegrationApp.app */,
 				EE9B75EC1CF7956C00275851 /* IntegrationTests_1.xctest */,
@@ -1611,7 +1611,7 @@
 			);
 			name = WebDriverAgentRunner;
 			productName = XCTUITestRunner;
-			productReference = EEF9882A1C486603005CA669 /* WebDriverAgentRunner.xctest */;
+			productReference = EEF9882A1C486603005CA669 /* WDARunner.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -2270,7 +2270,7 @@
 					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.WebDriverAgentRunner;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WDARunner;
 				USES_XCTRUNNER = YES;
 			};
 			name = Debug;
@@ -2292,7 +2292,7 @@
 					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.facebook.WebDriverAgentRunner;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WDARunner;
 				USES_XCTRUNNER = YES;
 			};
 			name = Release;
