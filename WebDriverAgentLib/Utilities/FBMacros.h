@@ -18,7 +18,10 @@
 #define FBTransferEmptyStringToNil(value) ([value isEqual:@""] ? nil : value)
 
 /*! Returns 'value1' or 'value2' if 'value1' is an empty string */
-#define FBFirstNonEmptyValue(value1, value2) (value1 == nil || [value1 isEqual:@""] ? value2 : value1)
+#define FBFirstNonEmptyValue(value1, value2) ^{ \
+  id value1computed = value1; \
+  return (value1computed == nil || [value1computed isEqual:@""] ? value2 : value1computed); \
+}()
 
 /*! Returns 'value' or NSNull if 'value' is nil */
 #define FBValueOrNull(value) ((value) ?: [NSNull null])
@@ -46,3 +49,6 @@
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+/*! Converts the given number of milliseconds into seconds */
+#define FBMillisToSeconds(ms) ((ms) / 1000.0)

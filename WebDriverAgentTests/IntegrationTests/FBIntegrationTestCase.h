@@ -13,6 +13,9 @@
 
 extern NSString *const FBShowAlertButtonName;
 extern NSString *const FBShowSheetAlertButtonName;
+extern NSString *const FBShowAlertForceTouchButtonName;
+extern NSString *const FBTouchesCountLabelIdentifier;
+extern NSString *const FBTapsCountLabelIdentifier;
 
 /**
  XCTestCase helper class used for integration tests
@@ -37,6 +40,11 @@ extern NSString *const FBShowSheetAlertButtonName;
 - (void)goToAlertsPage;
 
 /**
+ Navigates integration app to touch page
+ */
+- (void)goToTouchPage;
+
+/**
  Navigates to SpringBoard first page
  */
 - (void)goToSpringBoardFirstPage;
@@ -56,5 +64,16 @@ extern NSString *const FBShowSheetAlertButtonName;
  @param showCells whether should navigate to view with cell or plain scrollview
  */
 - (void)goToScrollPageWithCells:(BOOL)showCells;
+
+/**
+ Verifies no alerts are present on the page.
+ If an alert exists then it is going to be dismissed.
+ */
+- (void)clearAlert;
+
+/**
+ Resets device orientation to portrait mode
+ */
+- (void)resetOrientation;
 
 @end

@@ -12,12 +12,13 @@
 #import "FBIntegrationTestCase.h"
 #import "FBTestMacros.h"
 
+#import "FBMacros.h"
 #import "XCUIElement+FBIsVisible.h"
 #import "XCUIElement+FBScrolling.h"
 
-#define FBCellElementWithLabel(label) ([self.testedApplication descendantsMatchingType:XCUIElementTypeAny][label])
-#define FBAssertVisibleCell(label) FBAssertWaitTillBecomesTrue(FBCellElementWithLabel(label).fb_isVisible)
-#define FBAssertInvisibleCell(label) FBAssertWaitTillBecomesTrue(!FBCellElementWithLabel(label).fb_isVisible)
+#import "XCUIElement+FBClassChain.h"
+#import "FBXCodeCompatibility.h"
+
 
 @interface FBScrollingTests : FBIntegrationTestCase
 @property (nonatomic, strong) XCUIElement *scrollView;
@@ -34,9 +35,8 @@
 {
   [super setUp];
   [self launchApplication];
-  [self goToScrollPageWithCells:[self.class shouldShowCells]];
+  [self goToScrollPageWithCells:YES];
   self.scrollView = [[self.testedApplication.query descendantsMatchingType:XCUIElementTypeAny] matchingIdentifier:@"scrollView"].element;
-  [self.scrollView resolve];
 }
 
 - (void)testCellVisibility
@@ -80,16 +80,19 @@
   FBAssertVisibleCell(cellName);
 }
 
-@end
-
-@interface FBNoCellScrollingTests : FBScrollingTests
-@end
-
-@implementation FBNoCellScrollingTests
-
-+ (BOOL)shouldShowCells
+- (void)testAttributeWithNullScrollToVisible
 {
-  return NO;
+  NSError *error;
+  NSArray<XCUIElement *> *queryMatches = [self.testedApplication fb_descendantsMatchingClassChain:@"**/XCUIElementTypeTable/XCUIElementTypeCell[60]" shouldReturnAfterFirstMatch:NO];
+  XCTAssertEqual(queryMatches.count, 1);
+  XCUIElement *element = queryMatches.firstObject;
+  XCTAssertFalse(element.fb_isVisible);
+  [element fb_scrollToVisibleWithError:&error];
+  XCTAssertNil(error);
+  XCTAssertTrue(element.fb_isVisible);
+  [element tap];
+  XCTAssertTrue(element.wdSelected);
 }
 
 @end
+

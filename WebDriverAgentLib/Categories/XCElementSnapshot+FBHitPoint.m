@@ -8,18 +8,22 @@
  */
 
 #import "XCElementSnapshot+FBHitPoint.h"
+
 #import "FBLogger.h"
+#import "XCUIHitPointResult.h"
+#import "XCElementSnapshot+FBHelpers.h"
 
 @implementation XCElementSnapshot (FBHitPoint)
 
-- (CGPoint)fb_hitPoint
+- (NSValue *)fb_hitPoint
 {
-  @try {
-    return [self hitPoint];
-  } @catch (NSException *e) {
-    [FBLogger logFmt:@"Failed to fetch hit point for %@ - %@", self.debugDescription, e.reason];
-    return CGPointMake(-1, -1); // Same what XCTest does
+  NSError *error;
+  XCUIHitPointResult *result = [self hitPoint:&error];
+  if (nil != error) {
+    [FBLogger logFmt:@"Failed to fetch hit point for %@ - %@", self.fb_description, error.localizedDescription];
+    return nil;
   }
+  return [NSValue valueWithCGPoint:result.hitPoint];
 }
 
 @end
